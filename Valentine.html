@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Признайся, что ты меня любишь?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffcccb;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: background-image 0.5s ease;
+            background-size: cover;
+            background-position: center;
+        }
+        #question {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .yes {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .no {
+            background-color: #f44336;
+            color: white;
+        }
+        #hearts {
+            display: none;
+            font-size: 3em;
+        }
+        #loading {
+            display: none;
+            width: 80%; /* Уменьшаем ширину полосы загрузки */
+            height: 30px;
+            background-color: #ff69b4; /* Розовый фон */
+            position: relative;
+            margin: 10px auto; /* Центрируем полосу загрузки и добавляем отступ */
+            overflow: hidden; /* Обрезаем всё, что выходит за границы */
+        }
+        #loading-bar {
+            height: 100%;
+            width: 0%;
+            background-color: white; /* Белая полоса загрузки */
+        }
+        #loading-percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-size: 1em;
+        }
+        #final-message {
+            display: none;
+            font-size: 3em;
+        }
+        #content {
+            transition: opacity 0.5s ease;
+        }
+        #final-image-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        #final-image {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        #forever-text {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        #buttons-container {
+            display: flex;
+            justify-content: center; /* Центрируем кнопки */
+        }
+        #loading-text {
+            font-size: 1.5em;
+            margin-top: 5px;
+            text-align: center; /* Центрируем текст над полосой загрузки */
+            display: none; /* Скрываем надпись по умолчанию */
+        }
+    </style>
+</head>
+<body>
+
+<div id="content">
+    <div id="question">Ты меня любишь? ❤️</div>
+    <div id="buttons-container">
+        <button class="button yes" onclick="showHearts()">Да</button>
+        <button class="button no" onmouseover="moveButton(this)">Нет</button>
+    </div>
+    
+    <div id="loading">
+        <div id="loading-bar"></div>
+        <div id="loading-percentage">0%</div>
+    </div>
+    <div id="loading-text">Загрузка любви👉👈</div>
+</div>
+
+<div id="final-image-container">
+    <div id="forever-text">Forever</div>
+    <img id="final-image" src="https://pplx-res.cloudinary.com/image/upload/v1739543450/user_uploads/gUzegsDwBAgdyZt/sticker.jpg" alt="Final Image">
+</div>
+
+<script>
+    function showHearts() {
+        // Скрываем кнопки
+        document.getElementById('buttons-container').style.display = 'none';
+        // Показываем надпись "Загрузка любви"
+        document.getElementById('loading-text').style.display = 'block';
+        startLoading();
+    }
+
+    function moveButton(button) {
+        const randomX = Math.random() * (window.innerWidth - button.offsetWidth);
+        const randomY = Math.random() * (window.innerHeight - button.offsetHeight);
+        
+        button.style.position = 'absolute';
+        button.style.left = randomX + 'px';
+        button.style.top = randomY + 'px';
+    }
+
+    function startLoading() {
+        document.getElementById('loading').style.display = 'block';
+        
+        let width = 0;
+        const loadingBar = document.getElementById('loading-bar');
+        const loadingPercentage = document.getElementById('loading-percentage');
+        
+        const interval = setInterval(() => {
+            if (width >= 100) {
+                clearInterval(interval);
+                setTimeout(showFinalImage, 1500); // Изменяем задержку на 1.5 секунды
+                return;
+            }
+            width++;
+            loadingBar.style.width = width + '%';
+            loadingPercentage.innerText = width + '%';
+        }, 50);
+    }
+
+    function showFinalImage() {
+        const contentDiv = document.getElementById('content');
+        contentDiv.style.display = 'none';
+
+        const finalImageContainer = document.getElementById('final-image-container');
+        finalImageContainer.style.display = 'flex';
+
+        document.body.style.backgroundImage = "none";
+    }
+</script>
