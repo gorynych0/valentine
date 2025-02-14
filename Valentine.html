@@ -45,17 +45,17 @@
         }
         #loading {
             display: none;
-            width: 80%; /* Уменьшаем ширину полосы загрузки */
+            width: 80%;
             height: 30px;
-            background-color: #ff69b4; /* Розовый фон */
+            background-color: #ff69b4;
             position: relative;
-            margin: 10px auto; /* Центрируем полосу загрузки и добавляем отступ */
-            overflow: hidden; /* Обрезаем всё, что выходит за границы */
+            margin: 10px auto;
+            overflow: hidden;
         }
         #loading-bar {
             height: 100%;
             width: 0%;
-            background-color: white; /* Белая полоса загрузки */
+            background-color: white;
         }
         #loading-percentage {
             position: absolute;
@@ -87,13 +87,13 @@
         }
         #buttons-container {
             display: flex;
-            justify-content: center; /* Центрируем кнопки */
+            justify-content: center;
         }
         #loading-text {
             font-size: 1.5em;
             margin-top: 5px;
-            text-align: center; /* Центрируем текст над полосой загрузки */
-            display: none; /* Скрываем надпись по умолчанию */
+            text-align: center;
+            display: none;
         }
     </style>
 </head>
@@ -120,9 +120,7 @@
 
 <script>
     function showHearts() {
-        // Скрываем кнопки
         document.getElementById('buttons-container').style.display = 'none';
-        // Показываем надпись "Загрузка любви"
         document.getElementById('loading-text').style.display = 'block';
         startLoading();
     }
@@ -146,7 +144,7 @@
         const interval = setInterval(() => {
             if (width >= 100) {
                 clearInterval(interval);
-                setTimeout(showFinalImage, 1500); // Изменяем задержку на 1.5 секунды
+                setTimeout(showFinalImage, 1500);
                 return;
             }
             width++;
@@ -165,3 +163,5 @@
         document.body.style.backgroundImage = "none";
     }
 </script>
+</body>
+</html>
